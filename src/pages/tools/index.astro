@@ -1,0 +1,82 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import "../../styles/global.css";
+
+const req = await fetch(
+  "https://api.github.com/repos/Minecodes/tools.mcds.moe/contributors"
+);
+const rawContributors = await req.json();
+const contributors = rawContributors.map((c) => {
+  return {
+    name: c.login,
+    avatar: c.avatar_url,
+    url: c.html_url,
+  };
+});
+
+console.log(contributors);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title=`Tools - ${SITE_TITLE}` description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Tools</h1>
+      <p>
+        This is a collection of tools that I have made. Some of the tools here
+        are for transforming base64, transform markdown to html, and more.
+      </p>
+
+      <div class="flex flex-wrap space-y-5">
+        <a
+          href="/tools/mdhtml"
+          class="card border-2 border-black rounded-xl text-center"
+        >
+          <h2>MDHTML</h2>
+          <p>
+            This is a tool for transforming markdown to html. You can paste your
+            markdown in the left side and see the html on the right side.
+          </p>
+        </a>
+        <a
+          href="/tools/base64"
+          class="card border-2 border-black rounded-xl text-center"
+        >
+          <h2>BASE64</h2>
+          <p>
+            This is a tool for transforming text to base64. You can paste your
+            text in the left side and see the base64 on the right side.
+          </p>
+        </a>
+        <a
+          href="/tools/md5"
+          class="card border-2 border-black rounded-xl text-center"
+        >
+          <h2>MD5</h2>
+          <p>
+            This is a tool for transforming text to md5. You can paste your text
+            in the left side and see the md5 on the right side.
+          </p>
+        </a>
+        <a
+          href="/tools/jsonyaml"
+          class="card border-2 border-black rounded-xl text-center"
+        >
+            <h2>json/yaml</h2>
+            <p>
+            This is a tool for converting between JSON and YAML formats. You can paste your 
+            JSON or YAML in one side and see it converted to the other format.
+            </p>
+        </a>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,92 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import "../../styles/global.css";
+import Loaded from "../../components/loaded.astro";
+
+let html = "Your code is going to appear here";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title=`MDHTML - ${SITE_TITLE}` description={SITE_DESCRIPTION} />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/default.min.css"
+    />
+    <script
+      type="text/partytown"
+      src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script
+      type="text/partytown"
+      src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script
+      type="text/partytown"
+      src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
+    ></script>
+    <script
+      type="text/partytown"
+      src="https://cdn.jsdelivr.net/npm/canvas-confetti/dist/confetti.browser.min.js"
+    ></script>
+    <script type="text/partytown" src="/scripts/mdhtml.js"></script>
+    <script type="text/partytown" src="/scripts/loaded.js"></script>
+    <style>
+      main {
+        font-family: "Sometype Mono Variable", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main class="flex flex-col items-center">
+      <Loaded />
+      <h1 class="font-extrabold">MDHTML</h1>
+      <p class="text-center max-w-2xl mb-4">
+        A simple tool that instantly converts Markdown to HTML. Paste your
+        Markdown text in the left field and get clean, ready-to-use HTML code on
+        the right. Perfect for quickly preparing content for websites without
+        manually writing HTML tags.
+      </p>
+      <p>
+        This tool is based on <a href="https://github.com/Minecodes/mdhtml"
+          >Minecodes/mdhtml</a
+        >.
+      </p>
+      <p>
+        <button
+          id="copy"
+          class="border rounded-md p-2 border-gray-500 cursor-pointer self-center mb-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6 stroke-gray-700"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"
+            ></path>
+          </svg>
+        </button>
+      </p>
+      <div class="flex flex-col gap-4">
+        <textarea
+          id="markdown"
+          class="field-sizing-fixed w-80 h-80 p-2 border border-gray-300 rounded"
+          placeholder="Paste your markdown here"></textarea>
+        <pre>
+          <code id="html" class="language-html w-min-80 h-min-80">
+            {html}
+          </code>
+        </pre>
+      </div>
+    </main>
+  </body>
+</html>
